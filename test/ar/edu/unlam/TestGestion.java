@@ -100,9 +100,13 @@ public class TestGestion {
 		
 		assertTrue(gestion.inscribirAlumnoAComision(matias.getDni(), nuevaComision.getId()));
 	
-
+	}
+	
+	@Test
+	public void queNoSePuedaAsignarProfesorYAulaSiNoEstanDadosDeAlta() {
+		GestionAcademica gestion = new GestionAcademica();
 		
-		
+		assertFalse(gestion.asignarProfesorYAulaAComision(99999, 9999, 99999));
 		
 	}
 	
