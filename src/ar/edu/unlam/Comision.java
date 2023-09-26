@@ -49,6 +49,10 @@ public class Comision {
 		return Objects.equals(ciclo, other.ciclo) && Objects.equals(materia, other.materia) && turno == other.turno;
 	}
 	
+	public Boolean agregarDocente(Profesor docente) {
+		return docentes.add(docente);
+	}
+	
 	
 
 }

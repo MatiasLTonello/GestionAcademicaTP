@@ -32,4 +32,37 @@ public class GestionAcademica {
 	public Boolean agregarDocentes(Profesor profesor) {
 		return docentes.add(profesor);
 	}
+
+	public Boolean asignarDocenteAComision(Comision nuevaComision, Profesor andy) {
+		return nuevaComision.agregarDocente(andy);
+	}
+	
+	public Materia buscarMateria(Integer idMateria) {
+		for(Materia materia : materias) {
+			if(materia.getId().equals(idMateria)) {
+				return materia;
+			}
+		}
+		return null;
+	}
+	
+	public Boolean agregarCorrelatividad(Integer idMateria, Integer idCorrelativa) {
+		 Materia materia1 = buscarMateria(idMateria);
+		 Materia materiaCorrelativa = buscarMateria(idCorrelativa);
+		 
+		 if(materia1 != null && materiaCorrelativa != null) {
+			 return materia1.agregarCorrelativa(materiaCorrelativa);
+		 } 
+		 return false;
+		 
+	}
+
+	public Boolean eliminarCorrelatividad(Integer idMateria, Integer idCorrelatividadAEliminar) {
+		Materia materia1 = buscarMateria(idMateria);
+		Boolean existeCorrelatividad = materia1.buscarCorrelatividad(idCorrelatividadAEliminar);
+		if(existeCorrelatividad) {
+			return materia1.eliminarCorrelatividad(idCorrelatividadAEliminar);
+		}
+		return false;
+	}
 }

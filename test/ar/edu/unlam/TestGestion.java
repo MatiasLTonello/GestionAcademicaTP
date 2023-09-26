@@ -41,8 +41,36 @@ public class TestGestion {
 		Comision nuevaComision = new Comision(lengua, ciclo1, Turno.NOCHE );
 
 		gestion.asignarDocenteAComision(nuevaComision, andy);
+		assertFalse(gestion.asignarDocenteAComision(nuevaComision, juanma));
 
 		//asignarDocentesAComision
+	}
+	
+	@Test
+	public void queSePuedaAgregarUnaCorrelatividad() {
+		GestionAcademica gestion = new GestionAcademica();
+		Materia lengua = new Materia("Lengua", 1);
+		Materia lengua2 = new Materia("Lengua2", 2);
+		
+		gestion.agregarMateria(lengua);
+		gestion.agregarMateria(lengua2);
+		
+		assertTrue(gestion.agregarCorrelatividad(1, 2));
+
+	}
+	
+	@Test
+	public void queSePuedaEliminarUnaCorrelatividad() {
+		GestionAcademica gestion = new GestionAcademica();
+		Materia lengua = new Materia("Lengua", 1);
+		Materia lengua2 = new Materia("Lengua2", 2);
+		
+		gestion.agregarMateria(lengua);
+		gestion.agregarMateria(lengua2);
+		
+		gestion.agregarCorrelatividad(1, 2);
+		
+		assertTrue(gestion.eliminarCorrelatividad(1, 2));
 	}
 
 }
