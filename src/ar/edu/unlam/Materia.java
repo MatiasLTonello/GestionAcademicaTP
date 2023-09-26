@@ -8,6 +8,7 @@ public class Materia {
 	
 	private String nombre;
 	private Integer id;
+	private Integer nota;
     private HashSet<Materia> correlativas;
 
 	public String getNombre() {
@@ -21,6 +22,12 @@ public class Materia {
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public Integer getNota() {
+		return id;
+	}
+	public void setNota(Integer nota) {
+		this.nota = nota;
 	}
 	public Materia(String nombre, Integer id) {
 		super();

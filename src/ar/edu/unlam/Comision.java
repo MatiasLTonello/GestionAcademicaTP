@@ -7,14 +7,25 @@ public class Comision {
 	
 	private Materia materia;
 	private CicloLectivo ciclo;
+	private Integer id;
 	private Turno turno;
 	private HashSet<Profesor> docentes;
+	private Alumno alumnos;
 	
 	public Materia getMateria() {
 		return materia;
 	}
 	public void setMateria(Materia materia) {
 		this.materia = materia;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Alumno getAlumnos() {
+		return alumnos;
 	}
 	public CicloLectivo getCiclo() {
 		return ciclo;
@@ -52,6 +63,8 @@ public class Comision {
 	public Boolean agregarDocente(Profesor docente) {
 		return docentes.add(docente);
 	}
+	
+	
 	
 	
 
