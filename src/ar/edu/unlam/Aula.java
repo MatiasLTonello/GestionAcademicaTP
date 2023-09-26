@@ -2,8 +2,8 @@ package ar.edu.unlam;
 
 public class Aula {
     private String idAula;
-    private int capacidadMaxima;
-    private int cantidadAlumnosInscritos;
+    private Integer capacidadMaxima;
+    private Integer cantidadAlumnosInscritos;
 
     public Aula(String idAula, int capacidadMaxima) {
         this.idAula = idAula;
@@ -34,4 +34,9 @@ public class Aula {
             cantidadAlumnosInscritos--;
         }
     }
+    
+    public Boolean verificiarDisponibilidad() {
+    	return capacidadMaxima > cantidadAlumnosInscritos;
+    }
+    
 }

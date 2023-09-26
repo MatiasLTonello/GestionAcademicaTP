@@ -6,6 +6,7 @@ import java.util.Objects;
 public class Comision {
 	
 	private Materia materia;
+	private Aula aula;
 	private CicloLectivo ciclo;
 	private Integer id;
 	private Turno turno;
@@ -62,6 +63,13 @@ public class Comision {
 	
 	public Boolean agregarDocente(Profesor docente) {
 		return docentes.add(docente);
+	}
+	public Aula getAula() {
+		return aula;
+	}
+	
+	public void setAula(Aula aula) {
+		this.aula = aula;
 	}
 	
 	

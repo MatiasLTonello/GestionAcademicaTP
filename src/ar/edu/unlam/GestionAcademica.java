@@ -137,15 +137,21 @@ public class GestionAcademica {
 		 //TODO
 		 
 		 //No se puede inscribir el alumno si excede la cantidad de alumnos permitidos en el aula 
+		 
+		 if(!comision.getAula().verificiarDisponibilidad()) {
+			 return false;
+		 }
 
 		//No se puede inscribir el Alumno si ya está inscripto a otra comisión el mismo día y Turno 
 
+		 
 		//No se puede inscribir a una materia que haya aprobado previamente 
 		 
+		 if(alumnoAInscribir.buscarMateriaAprobadaPorId(idMateriaAInscribirse) != null) {
+			 return false;
+		 }
 		
-		alumnos.add(alumnoAInscribir);
-       //aula.incrementarCantidadAlumnosInscritos();
-        return true;
+		return alumnos.add(alumnoAInscribir);
 	}
 
 
