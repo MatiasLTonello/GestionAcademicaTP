@@ -170,6 +170,36 @@ public class GestionAcademica {
 		
 		return true;
 	}
+	
+	public Boolean registrarNota(Integer idComision, Integer idAlumno, Integer nota) {
+		 if(nota > 10 || nota < 1) {
+			 return false;
+		 }
+		 
+		 Comision comision = obtenerComisionPorId(idComision);
+		 Materia materia = comision.getMateria();
+		Integer idMateria = materia.getId();
+		Boolean existeCorrelativa = materia.buscarCorrelatividad(idMateria);
+		Materia materiaCorrelativa = null;
+			
+			if(existeCorrelativa) {
+				materiaCorrelativa = buscarMateria(idMateria);
+			}
+			
+			if(nota > 7 && materiaCorrelativa.getNota() < 7) {
+				return false;
+			}
+			
+			//TODO
+			
+			//Las notas pueden ser de tipo 1erParc, 2doParc, Rec1Parcial, Rec2Parcial, Final 
+
+			//no puede rendir 2 recuperatorios, es solo 1. 
+
+			//para cargar la nota final, debe tener aprobadas las parciales 
+		
+		return true;
+	}
 }
 
 
