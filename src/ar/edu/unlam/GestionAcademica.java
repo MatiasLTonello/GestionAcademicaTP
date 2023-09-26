@@ -80,7 +80,36 @@ public class GestionAcademica {
 		return false;
 	}
 	
-	public Boolean inscribirAlumnoAComision(Alumno alumnoAInscribir, Comision comision) {
+	public Comision obtenerComisionPorId(Integer idComision) {
+		for(Comision comision : comisiones) {
+			if(comision.getId().equals(idComision)) {
+				return comision;
+			}
+		}
+		return null;
+	}
+	
+	public Alumno obtenerAlumnoPorDni(String idAlumno) {
+		for(Alumno alumno : alumnos) {
+			if(alumno.getDni().equals(idAlumno)) {
+				return alumno;
+			}
+		}
+		return null;
+	}
+	
+	
+	public Boolean inscribirAlumnoAComision(String idAlumno, Integer idComision) {
+		
+		Comision comision = obtenerComisionPorId(idComision);
+        if (comision == null) {
+            return false;
+        }
+        
+        Alumno alumnoAInscribir = obtenerAlumnoPorDni(idAlumno);
+        if(alumnoAInscribir == null) {
+        	return false;
+        }
 		
 		if (!alumnos.contains(alumnoAInscribir) || !comisiones.contains(comision)) {
             return false;
@@ -119,15 +148,7 @@ public class GestionAcademica {
         return true;
 	}
 
-	public Comision obtenerComisionPorId(Integer idComision) {
-		for(Comision comision : comisiones) {
-			if(comision.getId().equals(idComision)) {
-				return comision;
-			}
-		}
-		return null;
-	}
-	
+
 	public Profesor obtenerDocentePorDNI(Integer dniDocente) {
 		for(Profesor docente : docentes) {
 			if(docente.getDni().equals(dniDocente)) {
@@ -200,6 +221,7 @@ public class GestionAcademica {
 		
 		return true;
 	}
+
 }
 
 

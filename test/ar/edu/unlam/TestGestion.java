@@ -73,6 +73,39 @@ public class TestGestion {
 		assertTrue(gestion.eliminarCorrelatividad(1, 2));
 	}
 	
+	@Test
+	public void queNoSePuedaInscribirAlumnoYComisionSiNoEstanDadosDeAlta() {
+		GestionAcademica gestion = new GestionAcademica();
+		
+		gestion.inscribirAlumnoAComision("99999", 99999);
+		
+		assertFalse(gestion.inscribirAlumnoAComision("99999", 99999));
+	}
+	
+	@Test
+	public void queSePuedaInscribir() {
+		GestionAcademica gestion = new GestionAcademica();
+		
+		Alumno matias = new Alumno("Matias", "Tonello", "02/03/1997", "01/01/2020", "40143300");
+		gestion.agregarAlumno(matias);;
+		
+		Materia matematica = new Materia("Matematica", 1);
+		gestion.agregarMateria(matematica);
+		
+		CicloLectivo ciclo1 = new CicloLectivo("10/02/2023", "10/03/2023", "10/01/2023");
+		gestion.agregarCicloLectivo(ciclo1);
+		
+		Comision nuevaComision = new Comision(matematica, ciclo1, Turno.NOCHE );
+		gestion.agregarComision(nuevaComision);
+		
+		assertTrue(gestion.inscribirAlumnoAComision(matias.getDni(), nuevaComision.getId()));
+	
+
+		
+		
+		
+	}
+	
 	
 
 }
