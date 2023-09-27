@@ -42,8 +42,9 @@ public class Comision {
 		this.turno = turno;
 	}
 	
-	public Comision(Materia materia, CicloLectivo ciclo, Turno turno) {
+	public Comision(Integer id,Materia materia, CicloLectivo ciclo, Turno turno) {
 		super();
+		this.id =id;
 		this.docentes = new HashSet<Profesor>();
 		this.alumnos = new HashSet<Alumno>();
 		this.materia = materia;

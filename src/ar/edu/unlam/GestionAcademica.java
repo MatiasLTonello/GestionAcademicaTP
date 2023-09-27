@@ -132,7 +132,7 @@ public class GestionAcademica {
 			materiaCorrelativa = buscarMateria(idMateriaAInscribirse);
 		}
 		
-		if(materiaCorrelativa.getNota() < 4) {
+		if(materiaCorrelativa != null && materiaCorrelativa.getNota() < 4) {
 			return false;
 		}
 		

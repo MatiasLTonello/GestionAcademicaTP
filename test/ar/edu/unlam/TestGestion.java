@@ -12,8 +12,8 @@ public class TestGestion {
 	GestionAcademica gestion = new GestionAcademica();
 	Materia lengua = new Materia("Lengua", 1);
 	CicloLectivo ciclo1 = new CicloLectivo("10/02/2023", "10/03/2023", "10/01/2023");
-	Comision nuevaComision = new Comision(lengua, ciclo1, Turno.NOCHE );
-	Comision nuevaComision2 = new Comision(lengua, ciclo1, Turno.NOCHE);
+	Comision nuevaComision = new Comision(1, lengua, ciclo1, Turno.NOCHE );
+	Comision nuevaComision2 = new Comision(2, lengua, ciclo1, Turno.NOCHE);
 	
 	gestion.agregarComision(nuevaComision);
 	
@@ -38,7 +38,7 @@ public class TestGestion {
 		Materia lengua = new Materia("Lengua", 1);
 		CicloLectivo ciclo1 = new CicloLectivo("10/02/2023", "10/03/2023", "10/01/2023");
 		
-		Comision nuevaComision = new Comision(lengua, ciclo1, Turno.NOCHE );
+		Comision nuevaComision = new Comision(1, lengua, ciclo1, Turno.NOCHE );
 
 		gestion.asignarDocenteAComision(nuevaComision, andy);
 		assertFalse(gestion.asignarDocenteAComision(nuevaComision, juanma));
@@ -72,42 +72,18 @@ public class TestGestion {
 		assertTrue(gestion.eliminarCorrelatividad(1, 2));
 	}
 	
-//	@Test
-//	public void queNoSePuedaInscribirAlumnoYComisionSiNoEstanDadosDeAlta() {
-//		GestionAcademica gestion = new GestionAcademica();
-//		
-//		gestion.inscribirAlumnoAComision("99999", 99999);
-//		
-//		assertFalse(gestion.inscribirAlumnoAComision("99999", 99999));
-//	}
-//	
-//	@Test
-//	public void queSePuedaInscribir() {
-//		GestionAcademica gestion = new GestionAcademica();
-//		
-//		Alumno matias = new Alumno("Matias", "Tonello", "02/03/1997", "01/01/2020", "40143300");
-//		gestion.agregarAlumno(matias);;
-//		
-//		Materia matematica = new Materia("Matematica", 1);
-//		gestion.agregarMateria(matematica);
-//		
-//		CicloLectivo ciclo1 = new CicloLectivo("10/02/2023", "10/03/2023", "10/01/2023");
-//		gestion.agregarCicloLectivo(ciclo1);
-//		
-//		Comision nuevaComision = new Comision(matematica, ciclo1, Turno.NOCHE );
-//		gestion.agregarComision(nuevaComision);
-//		
-//		assertTrue(gestion.inscribirAlumnoAComision(matias.getDni(), nuevaComision.getId()));
-//	
-//	}
-//	
-//	@Test
-//	public void queNoSePuedaAsignarProfesorYAulaSiNoEstanDadosDeAlta() {
-//		GestionAcademica gestion = new GestionAcademica();
-//		
-//		assertFalse(gestion.asignarProfesorYAulaAComision(99999, 9999, 99999));
-//		
-//	}
+	
+	
+	@Test
+	public void queNoSePuedaInscribirAlumnoYComisionSiNoEstanDadosDeAlta() {
+		GestionAcademica gestion = new GestionAcademica();
+		
+		gestion.inscribirAlumnoAComision("99999", 99999);
+		
+		assertFalse(gestion.inscribirAlumnoAComision("99999", 99999));
+	}
+	
+
 	
 	
 
