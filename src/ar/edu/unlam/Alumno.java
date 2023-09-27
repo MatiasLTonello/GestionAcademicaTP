@@ -11,7 +11,7 @@ public class Alumno extends Legajo {
 		this.materiasAprobadas = new HashSet<Materia>();  
 	}
 	
-	public Boolean agregarMateriaAprobada(Materia materiaAprobada) {
+	public Boolean agregarMateria(Materia materiaAprobada) {
 		return materiasAprobadas.add(materiaAprobada);
 	}
 	
@@ -24,6 +24,15 @@ public class Alumno extends Legajo {
 		return null;
 	}
 
+	public HashSet<Materia> getMateriasAprobadas() {
+		return materiasAprobadas;
+	}
+	
+	public Boolean aprobarMateria(Materia materiaAprobada, Integer notaFinal) {
+		materiaAprobada.setNota(notaFinal);
+		return materiasAprobadas.add(materiaAprobada);
+	}
+	
 	
 	
 }

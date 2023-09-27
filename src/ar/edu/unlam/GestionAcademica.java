@@ -59,6 +59,14 @@ public class GestionAcademica {
 		return null;
 	}
 	
+	public HashSet<Materia> obtenerMateriasAprobadasParaUnAlumno(String idAlumno) {
+		Alumno alumnoAObtenerMaterias = obtenerAlumnoPorDni(idAlumno);
+		if(alumnoAObtenerMaterias != null) {
+			return alumnoAObtenerMaterias.getMateriasAprobadas();
+		}
+		return null;
+	}
+	
 	
 	public Boolean agregarCorrelatividad(Integer idMateria, Integer idCorrelativa) {
 		 Materia materia1 = buscarMateria(idMateria);
@@ -134,19 +142,14 @@ public class GestionAcademica {
 			 return false;
 		 }
 		 
-		 //TODO
-		 
-		 //No se puede inscribir el alumno si excede la cantidad de alumnos permitidos en el aula 
-		 
+		 		 
 		 if(!comision.getAula().verificiarDisponibilidad()) {
 			 return false;
 		 }
 
 		//No se puede inscribir el Alumno si ya está inscripto a otra comisión el mismo día y Turno 
 
-		 
-		//No se puede inscribir a una materia que haya aprobado previamente 
-		 
+		 		 
 		 if(alumnoAInscribir.buscarMateriaAprobadaPorId(idMateriaAInscribirse) != null) {
 			 return false;
 		 }
@@ -155,7 +158,7 @@ public class GestionAcademica {
 	}
 
 
-	public Profesor obtenerDocentePorDNI(Integer dniDocente) {
+	public Profesor obtenerDocentePorDNI(String dniDocente) {
 		for(Profesor docente : docentes) {
 			if(docente.getDni().equals(dniDocente)) {
 				return docente;
@@ -174,7 +177,17 @@ public class GestionAcademica {
 		return null;
 	}
 	
-	public Boolean asignarProfesorYAulaAComision(Integer idComision, Integer dniDocente, Integer idAula){
+	public Boolean asignarProfesorALaComision(Integer idComision,String dniDocente) {
+		Comision comisionAAgregarProfesor = obtenerComisionPorId(idComision);
+		Profesor profe = obtenerDocentePorDNI(dniDocente);
+		
+		if(comisionAAgregarProfesor != null && profe != null) {
+			return comisionAAgregarProfesor.agregarDocente(profe);
+		}
+		return false;
+	}
+	
+	public Boolean asignarProfesorYAulaAComision(Integer idComision, String dniDocente, Integer idAula){
 		
 		  Comision comision = obtenerComisionPorId(idComision);
 	        if (comision == null) {
@@ -190,42 +203,43 @@ public class GestionAcademica {
 	        if(aula == null) {
 	        	return false;
 	        }
-	        
-	        //TODO
-	        // Calcular la cantidad de docentes necesarios (cada 20 alumnos)
-	        //int cantidadDocentesNecesarios = (cantidadAlumnosInscritos / 20) + 1;
+	       
 		
 		return true;
 	}
 	
-	public Boolean registrarNota(Integer idComision, Integer idAlumno, Integer nota) {
-		 if(nota > 10 || nota < 1) {
-			 return false;
-		 }
+	public Boolean registrarNota(Integer idComision, String idAlumno, Nota nota) {
 		 
 		 Comision comision = obtenerComisionPorId(idComision);
+		 Alumno alumnoARegistrarNota = obtenerAlumnoPorDni(idAlumno);
 		 Materia materia = comision.getMateria();
-		Integer idMateria = materia.getId();
-		Boolean existeCorrelativa = materia.buscarCorrelatividad(idMateria);
-		Materia materiaCorrelativa = null;
+		 Integer idMateria = materia.getId();
+		 Boolean existeCorrelativa = materia.buscarCorrelatividad(idMateria);
+		 Materia materiaCorrelativa = null;
 			
 			if(existeCorrelativa) {
 				materiaCorrelativa = buscarMateria(idMateria);
 			}
 			
-			if(nota > 7 && materiaCorrelativa.getNota() < 7) {
+			if(materiaCorrelativa.getNota() < 7) {
 				return false;
 			}
-			
-			//TODO
-			
-			//Las notas pueden ser de tipo 1erParc, 2doParc, Rec1Parcial, Rec2Parcial, Final 
 
-			//no puede rendir 2 recuperatorios, es solo 1. 
+			
+			if(comision.verificarSiElAlumnoYaRecupero(idAlumno)) {
+				return false;
+			}
 
-			//para cargar la nota final, debe tener aprobadas las parciales 
-		
-		return true;
+			return comision.registrarNota(alumnoARegistrarNota, nota);
+	}
+	
+	public Integer obtenerNota(String dniAlumno, Integer idMateria) {
+		Alumno alumno = obtenerAlumnoPorDni(dniAlumno);
+		Materia materiaAprobada = alumno.buscarMateriaAprobadaPorId(idMateria);
+		if(materiaAprobada != null) {
+			return materiaAprobada.getNota();
+		}
+		return null;
 	}
 
 }
