@@ -147,7 +147,6 @@ public class GestionAcademica {
 			 return false;
 		 }
 
-		//No se puede inscribir el Alumno si ya está inscripto a otra comisión el mismo día y Turno 
 
 		 		 
 		 if(alumnoAInscribir.buscarMateriaAprobadaPorId(idMateriaAInscribirse) != null) {

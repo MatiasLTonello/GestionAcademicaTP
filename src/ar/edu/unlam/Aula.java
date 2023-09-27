@@ -38,5 +38,4 @@ public class Aula {
     public Boolean verificiarDisponibilidad() {
     	return capacidadMaxima > cantidadAlumnosInscritos;
     }
-    
 }
